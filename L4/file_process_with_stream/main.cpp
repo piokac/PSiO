@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <map>
 #include <vector>
 
 int main()
@@ -31,6 +32,9 @@ int main()
         for (auto &word : words_unique) {
             std::cout << word << std::endl;
         }
+
+        std::map<std::string, std::vector<std::string>> telefony;
+        telefony["put.pzonan.pl"].emplace_back("6652880")
     }
 
     return 0;
