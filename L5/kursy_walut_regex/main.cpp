@@ -21,10 +21,12 @@ int main()
             rates; //map stores exchange rates (a value) and currency symbol (a key)
 
         while (std::regex_search(full_text, m, r)) {
-            //m[0] //full match of regexp
-            //m[1] //group 1 - currency units i.e 1, 100, 1000
-            //m[2] //group 2 - currency abreviation
-            //m[3] //group 3 - exchange rate
+            //            std::cout << m[1] << std::endl;
+            //            //m[0] //full match of regexp
+            //            //m[1] //group 1 - currency units i.e 1, 100, 1000
+            //            //m[2] //group 2 - currency abreviation
+            //            //m[3] //group 3 - exchange rate
+
             std::string rate = m[3];
             rate = rate.replace(rate.find(','), 1, "."); //replace decimal point
             rates[m[2]] = stod(rate) / stod(m[1]);
