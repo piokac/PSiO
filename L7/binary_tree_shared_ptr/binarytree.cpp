@@ -1,13 +1,15 @@
 ﻿#include "binarytree.h"
 
-BinaryTree::Node *BinaryTree::create(const std::string &key, const int &val)
+std::shared_ptr<BinaryTree::Node> BinaryTree::create(const std::string &key, const int &val)
 {
-    BinaryTree::Node *node = new BinaryTree::Node(key, val);
+    std::shared_ptr<BinaryTree::Node> node
+        = std::make_shared<BinaryTree::Node>(key, val); //new BinaryTree::Node(key, val);
 
     return node;
 }
 
-BinaryTree::Node *BinaryTree::find(BinaryTree::Node *node, const std::string &key)
+std::shared_ptr<BinaryTree::Node> BinaryTree::find(std::shared_ptr<BinaryTree::Node> node,
+                                                   const std::string &key)
 {
     if (node->word == key) {
         return node;
@@ -30,7 +32,8 @@ BinaryTree::Node *BinaryTree::find(BinaryTree::Node *node, const std::string &ke
     }
 }
 
-const BinaryTree::Node *BinaryTree::find(const BinaryTree::Node *node, const std::string &key) const
+const std::shared_ptr<BinaryTree::Node> BinaryTree::find(
+    const std::shared_ptr<BinaryTree::Node> node, const std::string &key) const
 {
     if (node->word == key) {
         return node;
@@ -52,7 +55,7 @@ const BinaryTree::Node *BinaryTree::find(const BinaryTree::Node *node, const std
     }
 }
 
-void BinaryTree::print(const BinaryTree::Node *node, std::ostream &str) const
+void BinaryTree::print(const std::shared_ptr<BinaryTree::Node> node, std::ostream &str) const
 {
     if (node->l != nullptr) {
         print(node->l, str);
@@ -63,7 +66,8 @@ void BinaryTree::print(const BinaryTree::Node *node, std::ostream &str) const
     }
 }
 
-void BinaryTree::dump(const BinaryTree::Node *node, BinaryTree::VectorConv &output) const
+void BinaryTree::dump(const std::shared_ptr<BinaryTree::Node> node,
+                      BinaryTree::VectorConv &output) const
 {
     if (node->l != nullptr) {
         dump(node->l, output);
@@ -76,18 +80,18 @@ void BinaryTree::dump(const BinaryTree::Node *node, BinaryTree::VectorConv &outp
     }
 }
 
-void BinaryTree::release(const BinaryTree::Node *node)
-{
-    if (node->l != nullptr) {
-        release(node->l);
-    }
-    if (node->r != nullptr) {
-        release(node->r);
-    }
-    delete node;
-}
+//void BinaryTree::release(const std::shared_ptr<BinaryTree::Node> node)
+//{
+//    if (node->l != nullptr) {
+//        release(node->l);
+//    }
+//    if (node->r != nullptr) {
+//        release(node->r);
+//    }
+//    delete node;
+//}
 
-void BinaryTree::copy(const BinaryTree::Node *node)
+void BinaryTree::copy(const std::shared_ptr<BinaryTree::Node> node)
 {
     (*this)[node->word] = node->counter;
     if (node->l != nullptr) {
@@ -105,15 +109,10 @@ BinaryTree::BinaryTree(const BinaryTree &src)
     copy(src.root_);
 }
 
-BinaryTree BinaryTree::operator=(const BinaryTree &src)
+BinaryTree &BinaryTree::operator=(const BinaryTree &src)
 {
     copy(src.root_);
     return *this;
-}
-
-BinaryTree::~BinaryTree()
-{
-    release(root_);
 }
 
 int &BinaryTree::operator[](const std::string &key)
