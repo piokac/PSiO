@@ -63,7 +63,57 @@ void BinaryTree::print(const BinaryTree::Node *node, std::ostream &str) const
     }
 }
 
+void BinaryTree::dump(const BinaryTree::Node *node, BinaryTree::VectorConv &output) const
+{
+    if (node->l != nullptr) {
+        dump(node->l, output);
+    }
+    std::pair<std::string, int> element = {node->word, node->counter};
+    output.emplace_back(element);
+
+    if (node->r != nullptr) {
+        dump(node->r, output);
+    }
+}
+
+void BinaryTree::release(const BinaryTree::Node *node)
+{
+    if (node->l != nullptr) {
+        release(node->l);
+    }
+    if (node->r != nullptr) {
+        release(node->r);
+    }
+    delete node;
+}
+
+void BinaryTree::copy(const BinaryTree::Node *node)
+{
+    (*this)[node->word] = node->counter;
+    if (node->l != nullptr) {
+        copy(node->l);
+    }
+    if (node->r != nullptr) {
+        copy(node->r);
+    }
+}
+
 BinaryTree::BinaryTree() : root_(nullptr) {}
+
+BinaryTree::BinaryTree(const BinaryTree &src)
+{
+    copy(src.root_);
+}
+
+BinaryTree BinaryTree::operator=(const BinaryTree &src)
+{
+    copy(src.root_);
+}
+
+BinaryTree::~BinaryTree()
+{
+    release(root_);
+}
 
 int &BinaryTree::operator[](const std::string &key)
 {
@@ -83,6 +133,13 @@ const int &BinaryTree::operator[](const std::string &key) const
     } else {
         return find(root_, key)->counter;
     }
+}
+
+BinaryTree::operator VectorConv() const
+{
+    BinaryTree::VectorConv out;
+    dump(root_, out);
+    return out;
 }
 
 std::ostream &operator<<(std::ostream &str, const BinaryTree &tree)
