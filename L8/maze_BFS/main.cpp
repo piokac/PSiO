@@ -51,8 +51,28 @@ public:
     std::vector<std::pair<size_t, size_t>> find_exits(size_t pos_row, size_t pos_col)
     {
         std::vector<std::pair<size_t, size_t>> res;
-        //TODO: find exits algorithm
+        std::queue<std::pair<size_t, size_t>> q;
+        q.emplace(pos_row, pos_col);
 
+        do {
+            auto &[row, col] = q.front();
+            if (!maze[row][col].visited) {
+                maze[row][col].visited = true;
+                //                std::cerr << "visited: " << row << ", " << col << std::endl;
+                if (is_exit(row, col)) {
+                    res.emplace_back(col, row);
+                    //                    std::cerr << "exit" << std::endl;
+                }
+
+                //get neigbour list
+                std::vector<std::pair<size_t, size_t>> unseen_neighbours = neighbours(row, col);
+                for (auto &el : unseen_neighbours) {
+                    //                    std::cerr << "added: " << el.first << ", " << el.second << std::endl;
+                    q.emplace(el);
+                }
+            }
+            q.pop();
+        } while (q.size() != 0);
         return res;
     }
 };
