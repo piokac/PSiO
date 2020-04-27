@@ -67,9 +67,14 @@ public:
             to = e.road.second;
         auto itr = spanning_tree_.find(to);
         if (itr != spanning_tree_.end()) {
-            //TODO: update spanning tree node
+            //update existing spanning tree node
+            if (itr->second.distance_ > spanning_tree_[from].distance_ + e.distance_) {
+                itr->second.distance_ = spanning_tree_[from].distance_ + e.distance_;
+                itr->second.previous_city_ = from;
+            }
         } else {
-            //TODO: add node to spanning tree
+            //add new node to spanning tree
+            spanning_tree_[to] = {spanning_tree_[from].distance_ + e.distance_, from};
         }
         return {e.distance_, to};
     }
@@ -82,17 +87,30 @@ public:
                 //For connected node:
                 //1. update distance
                 //2. add to neighbours list
+                if (c == road) {
+                    res.emplace_back(update_distance(c, road));
+                }
             }
         }
         //        sort neighbours list wrt edge weight
+        std::sort(res.begin(), res.end());
         return res;
     }
 
     void find_rec(const City &current, const City &to)
     {
         spanning_tree_[current].visited_ = true;
+        if (current == to)
+            std::cout << "Path Found" << spanning_tree_[current].distance_ << std::endl;
+
         //1. update neighbours cummulated distance
+        auto res = neighbours(current);
         //2. visit all nodes which were not visited according DFS
+        for (const auto &[distance, city] : res) {
+            if (!spanning_tree_[city].visited_) {
+                find_rec(city, to);
+            }
+        }
 
         return;
     }
