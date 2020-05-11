@@ -35,7 +35,7 @@ private:
                 //TODO: to implement
             }
             case Status::win: {
-                return {pos, {1, board}}; //other player won
+                return {pos, {1, board}}; //you won
             }
             case Status::draw:
 
@@ -58,7 +58,7 @@ private:
                 //TODO:
             }
             case Status::win: {
-                return {pos, {-1, board}};
+                return {pos, {-1, board}}; //other player won
             }
             case Status::draw:
 
