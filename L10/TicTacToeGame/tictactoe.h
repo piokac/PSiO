@@ -19,7 +19,7 @@ public:
     /// \param pos std::pair representing row and columns of the gameboard <0;size_)
     /// \param player id of the player performing move
     /// \return std::pair consisted of: the active player id (if the move was correct the id of the next player, if not the active player is not changed). The Status represents the game state Status:move - move is possible, or Status:win or Status::drawn
-    std::pair<Player, Status> move(const Position &pos, Player player = Player::nullgit push);
+    std::pair<Player, Status> move(const Position &pos, Player player = Player::null);
     ///
     /// \brief active_player geter for active player
     /// \return player id Player::cross or Player::circle

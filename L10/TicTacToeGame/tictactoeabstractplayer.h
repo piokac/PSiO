@@ -14,7 +14,7 @@ public:
     virtual void update(const Board &board) { board_ = board; }
     virtual Position move() = 0;
     virtual void display() = 0;
-    virtual ~TicTacToeAbstractPlayer();
+    virtual ~TicTacToeAbstractPlayer() = default;
 };
 
 #endif // TICTACTOEABSTRACTPLAYER_H

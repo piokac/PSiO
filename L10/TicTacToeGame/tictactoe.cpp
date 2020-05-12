@@ -16,10 +16,14 @@ std::pair<Player, Status> TicTacToe::move(const Position &pos, Player player)
         player = active_player_;
         if (active_player_ == Player::null)
             active_player_ = Player::cross;
+    } else {
+        if (player != active_player_) {
+            return {active_player_, is_finished()}; //wrong player
+        }
     }
     if (check_move(row, col, player)) {
         board_[row][col] = player;
-        if (active_player_ == Player::cross)
+        if (active_player_ == Player::cross) //change player
             active_player_ = Player::circle;
         else
             active_player_ = Player::cross;
