@@ -32,13 +32,27 @@ private:
         switch (current_status) {
             {
             case Status::move: {
-                //TODO: to implement
+                std::list<Position> movements = movements_list(board);
+
+                std::pair<Position, Score> best_score_min = {pos, {2, board}};
+
+                for (auto const &pos : movements) {
+                    auto res = max(pos, board, player);
+                    if (res.second.score < best_score_min.second.score) {
+                        best_score_min = res;
+                        best_score_min.first = pos;
+                    }
+                }
+                return best_score_min;
             }
             case Status::win: {
-                return {pos, {1, board}}; //you won
+                //                std::cout << "other player won";
+                //                board.debug();
+                return {pos, {1, board}}; //other player won
             }
             case Status::draw:
-
+                //                std::cout << "draw";
+                //                board.debug();
                 return {pos, {0, board}};
             }
         }
@@ -51,14 +65,27 @@ private:
 
             current_status = res.second;
             player = res.first;
+            if (player != player_)
+                throw("wrong player");
         }
         switch (current_status) {
             {
             case Status::move: {
-                //TODO:
+                std::list<Position> movements = movements_list(board);
+
+                std::pair<Position, Score> best_score = {pos, {-2, board}};
+                for (auto const &pos : movements) {
+                    auto res = min(pos, board, player);
+                    if (res.second.score > best_score.second.score) {
+                        best_score = res;
+                        best_score.first = pos;
+                    }
+                }
+
+                return best_score;
             }
             case Status::win: {
-                return {pos, {-1, board}}; //other player won
+                return {pos, {-1, board}}; //player won
             }
             case Status::draw:
 

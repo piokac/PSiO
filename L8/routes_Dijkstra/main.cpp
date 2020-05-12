@@ -68,8 +68,13 @@ public:
         auto itr = spanning_tree_.find(to);
         if (itr != spanning_tree_.end()) {
             //TODO: update spanning tree node
+            if (spanning_tree_[to].distance_ > spanning_tree_[from].distance_ + e.distance_) {
+                spanning_tree_[to].distance_ = spanning_tree_[from].distance_ + e.distance_;
+                spanning_tree_[to].previous_city_ = from;
+            }
         } else {
             //TODO: add node to spanning tree
+            spanning_tree_[to] = {spanning_tree_[from].distance_ + e.distance_, from};
         }
         return {e.distance_, to};
     }
@@ -81,10 +86,16 @@ public:
             if (c == road) {
                 //For connected node:
                 //1. update distance
+                auto result = update_distance(c, road);
+
                 //2. add to neighbours list
+                if (spanning_tree_[result.second].visited_ == false) {
+                    res.emplace_back(result);
+                }
             }
         }
         //        sort neighbours list wrt edge weight
+        sort(res.begin(), res.end());
         return res;
     }
 
@@ -92,7 +103,15 @@ public:
     {
         spanning_tree_[current].visited_ = true;
         //1. update neighbours cummulated distance
+        auto neighbour_nodes = neighbours(current);
         //2. visit all nodes which were not visited according DFS
+        if (current == to) {
+            //            std::cout << "Path was found: " << spanning_tree_[to].distance_<< std::endl;
+            return;
+        }
+        for (const auto &[distance, city] : neighbour_nodes) {
+            find_rec(city, to);
+        }
 
         return;
     }
@@ -138,7 +157,7 @@ int main()
                                 {City::Olsztyn, City::Gdansk, 156},
                                 {City::Gdansk, City::Warszawa, 339}};
     Planner p(routes);
-    p.find_route(City::Gdansk, City::Zamosc);
+    p.find_route(City::Szczecin, City::Gdansk);
 
     return 0;
 }
