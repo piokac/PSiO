@@ -49,6 +49,7 @@ public:
     /// \brief debug prints board to std out
     ///
     void debug() const;
+    Status is_finished() const;
 
 protected:
     ///
@@ -63,7 +64,6 @@ protected:
     /// \brief is_finished virifies whether the game was finished (win or drawn)
     /// \return Status::win if active layer won, Status::drawn if drawn occured, Status::move if the game can be continued
     ///
-    Status is_finished() const;
 };
 
 #endif // TICTACTOE_H

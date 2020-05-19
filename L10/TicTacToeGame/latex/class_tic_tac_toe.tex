@@ -1,0 +1,277 @@
+\hypertarget{class_tic_tac_toe}{}\section{Tic\+Tac\+Toe Class Reference}
+\label{class_tic_tac_toe}\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+
+
+{\ttfamily \#include $<$tictactoe.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_tic_tac_toe_a27555f19d0f8041ef8ce9a268ec0554c}{Tic\+Tac\+Toe} (size\+\_\+t size)
+\item 
+\hyperlink{class_tic_tac_toe_a85910bb5d348929c9fef9f0b23813a60}{Tic\+Tac\+Toe} (const \hyperlink{common__defs_8h_a0dc5e1c0d1c3d4b1e210c805de5ca27b}{Board} \&board, \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player} player=\hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9a37a6259cc0c1dae299a7866489dff0bd}{Player\+::null})
+\item 
+std\+::pair$<$ \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player}, \hyperlink{common__defs_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status} $>$ \hyperlink{class_tic_tac_toe_a5bbb9eeb1ab08a3d9ce857cecc3d7ffc}{move} (const \hyperlink{common__defs_8h_af9623b96ea87eb8f2d0fe97e45b0f79a}{Position} \&pos, \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player} player=\hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9a37a6259cc0c1dae299a7866489dff0bd}{Player\+::null})
+\begin{DoxyCompactList}\small\item\em move performs player movement \end{DoxyCompactList}\item 
+\hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player} \hyperlink{class_tic_tac_toe_af58c3728beedc8d250927f1f07c03dee}{active\+\_\+player} () const
+\begin{DoxyCompactList}\small\item\em active\+\_\+player geter for active player \end{DoxyCompactList}\item 
+const \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player} \& \hyperlink{class_tic_tac_toe_abafc7ee6550f447cf9e4c798a3658ab7}{field} (const size\+\_\+t \&row, const size\+\_\+t \&col) const
+\begin{DoxyCompactList}\small\item\em field geter for particular field of the game board \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::vector$<$ \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player} $>$ $>$ \& \hyperlink{class_tic_tac_toe_a2bd8a25c0a5885b76ac84a201751b307}{state} () const
+\begin{DoxyCompactList}\small\item\em state geter for board \end{DoxyCompactList}\item 
+void \hyperlink{class_tic_tac_toe_a3b71a1e724f9af69d0fb8ba3dd848942}{debug} () const
+\begin{DoxyCompactList}\small\item\em debug prints board to std out \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static char \hyperlink{class_tic_tac_toe_a829574b09a8672b4fb65d4a7cfeba83e}{convert} (\hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player} p)
+\begin{DoxyCompactList}\small\item\em convert converts Player enum to char symbol \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_tic_tac_toe_a8495d66a8662f19b33be04e41da9a133}{check\+\_\+move} (size\+\_\+t row, size\+\_\+t col, \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player} player) const
+\begin{DoxyCompactList}\small\item\em check\+\_\+move verifies whether the move is possible \end{DoxyCompactList}\item 
+\hyperlink{common__defs_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status} \hyperlink{class_tic_tac_toe_a592cbbdeee049391313a0712ca12589c}{is\+\_\+finished} () const
+\begin{DoxyCompactList}\small\item\em is\+\_\+finished virifies whether the game was finished (win or drawn) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \hyperlink{class_tic_tac_toe_afc64aed11c9b53b699c61a8cc3b58dc2}{size\+\_\+}
+\item 
+\hyperlink{common__defs_8h_a0dc5e1c0d1c3d4b1e210c805de5ca27b}{Board} \hyperlink{class_tic_tac_toe_a577cac99116dca16cfa05890152c2d55}{board\+\_\+}
+\item 
+\hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player} \hyperlink{class_tic_tac_toe_a5acba985df8b3d158783a5f4f3521f2e}{active\+\_\+player\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 7 of file tictactoe.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_tic_tac_toe_a27555f19d0f8041ef8ce9a268ec0554c}\label{class_tic_tac_toe_a27555f19d0f8041ef8ce9a268ec0554c}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{Tic\+Tac\+Toe()}{TicTacToe()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file tictactoe.\+cpp.
+
+\mbox{\Hypertarget{class_tic_tac_toe_a85910bb5d348929c9fef9f0b23813a60}\label{class_tic_tac_toe_a85910bb5d348929c9fef9f0b23813a60}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{Tic\+Tac\+Toe()}{TicTacToe()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe (\begin{DoxyParamCaption}\item[{const \hyperlink{common__defs_8h_a0dc5e1c0d1c3d4b1e210c805de5ca27b}{Board} \&}]{board,  }\item[{\hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player}}]{player = {\ttfamily \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9a37a6259cc0c1dae299a7866489dff0bd}{Player\+::null}} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 8 of file tictactoe.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_tic_tac_toe_af58c3728beedc8d250927f1f07c03dee}\label{class_tic_tac_toe_af58c3728beedc8d250927f1f07c03dee}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!active\+\_\+player@{active\+\_\+player}}
+\index{active\+\_\+player@{active\+\_\+player}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{active\+\_\+player()}{active\_player()}}
+{\footnotesize\ttfamily \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player} Tic\+Tac\+Toe\+::active\+\_\+player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+active\+\_\+player geter for active player 
+
+\begin{DoxyReturn}{Returns}
+player id \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9a22aadb26447d87b550b155a4d764fad0}{Player\+::cross} or \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9a9b6ddeba5b33e577c07c35d8505c6072}{Player\+::circle} 
+\end{DoxyReturn}
+
+
+Definition at line 28 of file tictactoe.\+h.
+
+\mbox{\Hypertarget{class_tic_tac_toe_a8495d66a8662f19b33be04e41da9a133}\label{class_tic_tac_toe_a8495d66a8662f19b33be04e41da9a133}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!check\+\_\+move@{check\+\_\+move}}
+\index{check\+\_\+move@{check\+\_\+move}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{check\+\_\+move()}{check\_move()}}
+{\footnotesize\ttfamily bool Tic\+Tac\+Toe\+::check\+\_\+move (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{row,  }\item[{size\+\_\+t}]{col,  }\item[{\hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player}}]{player }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+check\+\_\+move verifies whether the move is possible 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & row of the board $<$0..size\+\_\+) \\
+\hline
+{\em col} & column of the board $<$0..size\+\_\+) \\
+\hline
+{\em player} & player id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true -\/ if move is correct, otherwise false 
+\end{DoxyReturn}
+
+
+Definition at line 30 of file tictactoe.\+cpp.
+
+\mbox{\Hypertarget{class_tic_tac_toe_a829574b09a8672b4fb65d4a7cfeba83e}\label{class_tic_tac_toe_a829574b09a8672b4fb65d4a7cfeba83e}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!convert@{convert}}
+\index{convert@{convert}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{convert()}{convert()}}
+{\footnotesize\ttfamily char Tic\+Tac\+Toe\+::convert (\begin{DoxyParamCaption}\item[{\hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player}}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+convert converts Player enum to char symbol 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & player enum (corss circle or empty) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+character symbol of the player 
+\end{DoxyReturn}
+
+
+Definition at line 81 of file tictactoe.\+cpp.
+
+\mbox{\Hypertarget{class_tic_tac_toe_a3b71a1e724f9af69d0fb8ba3dd848942}\label{class_tic_tac_toe_a3b71a1e724f9af69d0fb8ba3dd848942}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!debug@{debug}}
+\index{debug@{debug}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{debug()}{debug()}}
+{\footnotesize\ttfamily void Tic\+Tac\+Toe\+::debug (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+debug prints board to std out 
+
+
+
+Definition at line 91 of file tictactoe.\+cpp.
+
+\mbox{\Hypertarget{class_tic_tac_toe_abafc7ee6550f447cf9e4c798a3658ab7}\label{class_tic_tac_toe_abafc7ee6550f447cf9e4c798a3658ab7}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!field@{field}}
+\index{field@{field}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{field()}{field()}}
+{\footnotesize\ttfamily const \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player}\& Tic\+Tac\+Toe\+::field (\begin{DoxyParamCaption}\item[{const size\+\_\+t \&}]{row,  }\item[{const size\+\_\+t \&}]{col }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+field geter for particular field of the game board 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & \\
+\hline
+{\em col} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+field state \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9a37a6259cc0c1dae299a7866489dff0bd}{Player\+::null} field is empty, \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9a22aadb26447d87b550b155a4d764fad0}{Player\+::cross}, \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9a9b6ddeba5b33e577c07c35d8505c6072}{Player\+::circle} -\/ represent the player id 
+\end{DoxyReturn}
+
+
+Definition at line 35 of file tictactoe.\+h.
+
+\mbox{\Hypertarget{class_tic_tac_toe_a592cbbdeee049391313a0712ca12589c}\label{class_tic_tac_toe_a592cbbdeee049391313a0712ca12589c}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!is\+\_\+finished@{is\+\_\+finished}}
+\index{is\+\_\+finished@{is\+\_\+finished}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{is\+\_\+finished()}{is\_finished()}}
+{\footnotesize\ttfamily \hyperlink{common__defs_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status} Tic\+Tac\+Toe\+::is\+\_\+finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+is\+\_\+finished virifies whether the game was finished (win or drawn) 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{common__defs_8h_a67a0db04d321a74b7e7fcfd3f1a3f70ba0b08bd98d279b88859b628cd8c061ae0}{Status\+::win} if active layer won, Status\+::drawn if drawn occured, \hyperlink{common__defs_8h_a67a0db04d321a74b7e7fcfd3f1a3f70ba3734a903022249b3010be1897042568e}{Status\+::move} if the game can be continued 
+\end{DoxyReturn}
+
+
+Definition at line 35 of file tictactoe.\+cpp.
+
+\mbox{\Hypertarget{class_tic_tac_toe_a5bbb9eeb1ab08a3d9ce857cecc3d7ffc}\label{class_tic_tac_toe_a5bbb9eeb1ab08a3d9ce857cecc3d7ffc}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!move@{move}}
+\index{move@{move}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily std\+::pair$<$ \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player}, \hyperlink{common__defs_8h_a67a0db04d321a74b7e7fcfd3f1a3f70b}{Status} $>$ Tic\+Tac\+Toe\+::move (\begin{DoxyParamCaption}\item[{const \hyperlink{common__defs_8h_af9623b96ea87eb8f2d0fe97e45b0f79a}{Position} \&}]{pos,  }\item[{\hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player}}]{player = {\ttfamily \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9a37a6259cc0c1dae299a7866489dff0bd}{Player\+::null}} }\end{DoxyParamCaption})}
+
+
+
+move performs player movement 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & std\+::pair representing row and columns of the gameboard $<$0;size\+\_\+) \\
+\hline
+{\em player} & id of the player performing move \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::pair consisted of\+: the active player id (if the move was correct the id of the next player, if not the active player is not changed). The Status represents the game state Status\+:move -\/ move is possible, or Status\+:win or Status\+::drawn 
+\end{DoxyReturn}
+
+
+Definition at line 12 of file tictactoe.\+cpp.
+
+\mbox{\Hypertarget{class_tic_tac_toe_a2bd8a25c0a5885b76ac84a201751b307}\label{class_tic_tac_toe_a2bd8a25c0a5885b76ac84a201751b307}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!state@{state}}
+\index{state@{state}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{state()}{state()}}
+{\footnotesize\ttfamily const std\+::vector$<$std\+::vector$<$\hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player}$>$ $>$\& Tic\+Tac\+Toe\+::state (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+state geter for board 
+
+\begin{DoxyReturn}{Returns}
+2d std\+::vector representing board 
+\end{DoxyReturn}
+
+
+Definition at line 41 of file tictactoe.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_tic_tac_toe_a5acba985df8b3d158783a5f4f3521f2e}\label{class_tic_tac_toe_a5acba985df8b3d158783a5f4f3521f2e}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!active\+\_\+player\+\_\+@{active\+\_\+player\+\_\+}}
+\index{active\+\_\+player\+\_\+@{active\+\_\+player\+\_\+}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{active\+\_\+player\+\_\+}{active\_player\_}}
+{\footnotesize\ttfamily \hyperlink{common__defs_8h_a9c8780378078e51e7c9041cbac392db9}{Player} Tic\+Tac\+Toe\+::active\+\_\+player\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 13 of file tictactoe.\+h.
+
+\mbox{\Hypertarget{class_tic_tac_toe_a577cac99116dca16cfa05890152c2d55}\label{class_tic_tac_toe_a577cac99116dca16cfa05890152c2d55}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!board\+\_\+@{board\+\_\+}}
+\index{board\+\_\+@{board\+\_\+}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{board\+\_\+}{board\_}}
+{\footnotesize\ttfamily \hyperlink{common__defs_8h_a0dc5e1c0d1c3d4b1e210c805de5ca27b}{Board} Tic\+Tac\+Toe\+::board\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 12 of file tictactoe.\+h.
+
+\mbox{\Hypertarget{class_tic_tac_toe_afc64aed11c9b53b699c61a8cc3b58dc2}\label{class_tic_tac_toe_afc64aed11c9b53b699c61a8cc3b58dc2}} 
+\index{Tic\+Tac\+Toe@{Tic\+Tac\+Toe}!size\+\_\+@{size\+\_\+}}
+\index{size\+\_\+@{size\+\_\+}!Tic\+Tac\+Toe@{Tic\+Tac\+Toe}}
+\subsubsection{\texorpdfstring{size\+\_\+}{size\_}}
+{\footnotesize\ttfamily size\+\_\+t Tic\+Tac\+Toe\+::size\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 11 of file tictactoe.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{tictactoe_8h}{tictactoe.\+h}\item 
+\hyperlink{tictactoe_8cpp}{tictactoe.\+cpp}\end{DoxyCompactItemize}

@@ -75,6 +75,7 @@ Status TicTacToe::is_finished() const
         }
     }
     if (sequence_diag_rl || sequence_diag_lr)
+
         return Status::win;
 
     if (is_full)

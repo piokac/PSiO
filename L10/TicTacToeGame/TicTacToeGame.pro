@@ -14,3 +14,10 @@ HEADERS += \
     tictactoe.h \
     tictactoeabstractplayer.h \
     tictactoebot.h
+
+DISTFILES += \
+    abcd.qmodel \
+    tictactoemodel.qmodel
+
+STATECHARTS += \
+    sate.scxml
