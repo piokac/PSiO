@@ -251,9 +251,54 @@
                       </DInheritance>
                      </instance>
                     </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{083c4e10-36bc-4639-9639-15684a3ed915}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{48d3b8fc-cb1e-46d4-b3f5-be2a01f6b4b6}</object>
+                         <name>sf::RenderWindow</name>
+                         <pos>x:595;y:305</pos>
+                         <rect>x:-55;y:-30;w:110;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{1784c836-ee09-46f2-a529-8604049fec8f}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{585cc37f-3600-4d47-9dc2-e9495d09799a}</object>
+                         <a>{ae6d05df-c276-4d81-8b84-433ef4e220be}</a>
+                         <b>{083c4e10-36bc-4639-9639-15684a3ed915}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>*</cradinality>
+                         <navigable>true</navigable>
+                         <kind>1</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
                    </qlist>
                   </elements>
-                  <last-modified>1589878123607</last-modified>
+                  <last-modified>1590479092833</last-modified>
                   <toolbarid>General</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -528,6 +573,35 @@
                         </target>
                        </handle>
                       </item>
+                      <item>
+                       <handle>
+                        <uid>{585cc37f-3600-4d47-9dc2-e9495d09799a}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{585cc37f-3600-4d47-9dc2-e9495d09799a}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{9cccac9d-bfcf-4116-9178-32bcaebae5a9}</a>
+                             <b>{48d3b8fc-cb1e-46d4-b3f5-be2a01f6b4b6}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>*</cardinality>
+                             <navigable>true</navigable>
+                             <kind>1</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
                      </qlist>
                     </handles>
                    </handles>
@@ -604,6 +678,27 @@
                     </handles>
                    </handles>
                   </relations>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{48d3b8fc-cb1e-46d4-b3f5-be2a01f6b4b6}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{48d3b8fc-cb1e-46d4-b3f5-be2a01f6b4b6}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>sf::RenderWindow</name>
                  </MObject>
                 </base-MObject>
                </MClass>

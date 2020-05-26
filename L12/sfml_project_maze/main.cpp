@@ -3,18 +3,58 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+class LabiryntAbstract
+{
+public:
+    virtual void rysuj() const = 0;
+    //    virtual void ustaw_sciane(int x, int y, int w, int h) = 0;
+};
+class Decorator : public sf::Sprite
+{
+    std::unique_ptr<sf::Sprite> base_;
+    sf::RectangleShape rect_;
 
-class Scena
+public:
+    Decorator(std::unique_ptr<sf::Sprite> &el) : base_(std::move(el)), rect_(sf::Vector2f(10, 10))
+    {
+        rect_.setFillColor(sf::Color::Red);
+    }
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const
+    {
+        states.transform *= getTransform();
+        target.draw(*base_, states);
+        target.draw(rect_, states);
+    }
+};
+class Decorator_blue : public sf::Sprite
+{
+    std::unique_ptr<sf::Sprite> base_;
+    sf::RectangleShape rect_;
+
+public:
+    Decorator_blue(std::unique_ptr<sf::Sprite> &&el)
+        : base_(std::move(el)), rect_(sf::Vector2f(10, 10))
+    {
+        rect_.setFillColor(sf::Color::Blue);
+        rect_.setPosition(10, 50);
+    }
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const
+    {
+        states.transform *= getTransform();
+        target.draw(*base_, states);
+        target.draw(rect_, states);
+    }
+};
+
+class Labirynt : public LabiryntAbstract
 {
     std::vector<std::unique_ptr<sf::Sprite>> obiekty_;
     std::vector<std::unique_ptr<sf::Texture>> textury_;
-    sf::RenderWindow window_;
+    sf::RenderWindow *window_;
 
 public:
-    Scena(int W, int H) : window_(sf::VideoMode(W, H), "SFML app")
+    Labirynt(sf::RenderWindow *w) : window_(w)
     {
-        sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
-
         // create some shapes
         std::unique_ptr<sf::Texture> texture = std::make_unique<sf::Texture>();
         if (!texture->loadFromFile("../tex/grass.png")) {
@@ -38,7 +78,8 @@ public:
         textury_.emplace_back(std::move(texture_guy));
         guy->setTexture(**(textury_.end() - 1));
 
-        obiekty_.emplace_back(std::move(guy));
+        std::unique_ptr<Decorator> guy_decorated = std::make_unique<Decorator>(guy);
+        obiekty_.emplace_back(std::move(guy_decorated));
 
         std::unique_ptr<sf::Texture> texture_wall = std::make_unique<sf::Texture>();
         if (!texture_wall->loadFromFile("../tex/wall.png")) {
@@ -52,8 +93,14 @@ public:
         wall->setTexture(**(textury_.end() - 1));
         wall->setScale(0.3, 0.3);
         wall->setTextureRect(sf::IntRect(0, 0, 40, 400));
-        wall->setPosition(100, 100);
-        obiekty_.emplace_back(std::move(wall));
+
+        std::unique_ptr<Decorator> wall_decorated = std::make_unique<Decorator>(wall);
+        std::unique_ptr<Decorator_blue> wall_decorated_2 = std::make_unique<Decorator_blue>(
+            std::move(wall_decorated));
+
+        wall_decorated_2->setPosition(100, 100);
+        obiekty_.emplace_back(std::move(wall_decorated_2));
+        //        obiekty_.emplace_back(std::move(wall));
 
         std::unique_ptr<sf::Sprite> wall_2 = std::make_unique<sf::Sprite>();
 
@@ -65,14 +112,46 @@ public:
 
         obiekty_.emplace_back(std::move(wall_2));
     }
+    void rysuj() const
+    {
+        for (auto &el : obiekty_) {
+            window_->draw(*el);
+        }
+    }
+};
+class ScenaAbstract
+{
+public:
+    virtual void rysuj() = 0;
+    //    virtual void create_window(int w, int h) = 0;
+    virtual void loop() = 0;
+    virtual LabiryntAbstract *create(int level) = 0;
+};
+
+class Scena : public ScenaAbstract
+{
+    sf::RenderWindow window_;
+    LabiryntAbstract *labirynt_;
+
+public:
+    Scena(int W, int H) : window_(sf::VideoMode(W, H), "SFML app")
+    {
+        sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+        labirynt_ = create(0);
+    }
+    LabiryntAbstract *create(int level)
+    {
+        if (level == 0)
+            return new Labirynt(&window_);
+        else
+            return new Labirynt(&window_);
+    }
     void rysuj()
     {
         window_.clear(sf::Color::Black);
         // draw everything here...
 
-        for (auto &el : obiekty_) {
-            window_.draw(*el);
-        }
+        labirynt_->rysuj();
 
         // end the current frame
         window_.display();
