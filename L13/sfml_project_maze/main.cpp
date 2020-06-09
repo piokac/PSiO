@@ -25,6 +25,11 @@ public:
         target.draw(*base_, states);
         target.draw(rect_, states);
     }
+    virtual void setColor(const sf::Color &color)
+    {
+        rect_.setFillColor(color);
+        base_->setColor(color);
+    }
 };
 class Decorator_blue : public sf::Sprite
 {
@@ -44,6 +49,54 @@ public:
         target.draw(*base_, states);
         target.draw(rect_, states);
     }
+    virtual void setColor(const sf::Color &color)
+    {
+        rect_.setFillColor(color);
+        base_->setColor(color);
+    }
+};
+class UICommad
+{
+public:
+    virtual void execute() = 0;
+};
+class Button : public sf::RectangleShape
+{
+    UICommad *cmd_;
+
+public:
+    Button(const sf::Vector2f &pos, const sf::Vector2f &size, UICommad *cmd)
+        : sf::RectangleShape(size), cmd_(cmd)
+    {
+        setPosition(pos);
+    }
+    bool is_clicked(const sf::Vector2i &pos)
+    {
+        if (getGlobalBounds().contains(pos.x, pos.y)) {
+            cmd_->execute();
+            return true;
+        } else
+            return false;
+    }
+};
+
+class UICommadSetColor : public UICommad
+{
+    sf::Color color_;
+    sf::Shape *object_;
+
+public:
+    UICommadSetColor(const sf::Color &c, sf::Shape *object) : color_(c), object_(object) {}
+    void execute() override { object_->setFillColor(color_); }
+};
+class UICommadMove : public UICommad
+{
+    sf::Vector2f delta_;
+    sf::Transformable *object_;
+
+public:
+    UICommadMove(const sf::Vector2f &c, sf::Transformable *object) : delta_(c), object_(object) {}
+    void execute() override { object_->move(delta_); }
 };
 
 class Labirynt : public LabiryntAbstract
@@ -56,6 +109,7 @@ public:
     Labirynt(sf::RenderWindow *w) : window_(w)
     {
         // create some shapes
+
         std::unique_ptr<sf::Texture> texture = std::make_unique<sf::Texture>();
         if (!texture->loadFromFile("../tex/grass.png")) {
             std::cerr << "Could not load texture" << std::endl;
@@ -99,6 +153,7 @@ public:
             std::move(wall_decorated));
 
         wall_decorated_2->setPosition(100, 100);
+        wall_decorated_2->setColor(sf::Color::Green);
         obiekty_.emplace_back(std::move(wall_decorated_2));
         //        obiekty_.emplace_back(std::move(wall));
 
@@ -109,7 +164,6 @@ public:
         wall_2->setTextureRect(sf::IntRect(0, 0, 40, 400));
 
         wall_2->setPosition(300, 200);
-
         obiekty_.emplace_back(std::move(wall_2));
     }
     void rysuj() const
@@ -132,12 +186,26 @@ class Scena : public ScenaAbstract
 {
     sf::RenderWindow window_;
     LabiryntAbstract *labirynt_;
+    UICommadSetColor *setBlue;
+    UICommadSetColor *setRed;
+    UICommadMove *moveLeft;
+    std::vector<Button> buttons;
+    sf::RectangleShape rect_;
 
 public:
-    Scena(int W, int H) : window_(sf::VideoMode(W, H), "SFML app")
+    Scena(int W, int H) : window_(sf::VideoMode(W, H), "SFML app"), rect_(sf::Vector2f(100, 50))
     {
         sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
         labirynt_ = create(0);
+        rect_.setPosition(0, 300);
+
+        setBlue = new UICommadSetColor(sf::Color::Blue, &rect_);
+        setRed = new UICommadSetColor(sf::Color::Red, &rect_);
+        moveLeft = new UICommadMove(sf::Vector2f(10, 0), &rect_);
+        buttons.emplace_back(sf::Vector2f(0, 400), sf::Vector2f(50, 50), setBlue);
+        buttons.emplace_back(sf::Vector2f(100, 400), sf::Vector2f(50, 50), setRed);
+        buttons.emplace_back(sf::Vector2f(200, 400), sf::Vector2f(50, 50), setBlue);
+        buttons.emplace_back(sf::Vector2f(300, 400), sf::Vector2f(50, 50), moveLeft);
     }
     LabiryntAbstract *create(int level)
     {
@@ -152,7 +220,10 @@ public:
         // draw everything here...
 
         labirynt_->rysuj();
-
+        window_.draw(rect_);
+        for (auto &el : buttons) {
+            window_.draw(el);
+        }
         // end the current frame
         window_.display();
     }
@@ -174,8 +245,9 @@ public:
                 if (event.type == sf::Event::MouseButtonPressed) {
                     if (event.mouseButton.button == sf::Mouse::Left) {
                         sf::Vector2i mouse_pos = sf::Mouse::getPosition(window_);
-                        std::cout << "Mouse clicked: " << mouse_pos.x << ", " << mouse_pos.y
-                                  << std::endl;
+                        for (auto &el : buttons) {
+                            el.is_clicked(mouse_pos);
+                        }
                     }
                 }
             }

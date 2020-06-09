@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
     TicTacToe game(3);
-
+    //    TicTacToeProxy game(3);
     Status res;
 
     do {

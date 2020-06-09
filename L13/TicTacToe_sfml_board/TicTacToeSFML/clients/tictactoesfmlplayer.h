@@ -1,7 +1,7 @@
 ﻿#ifndef TICTACTOESFMLPLAYER_H
 #define TICTACTOESFMLPLAYER_H
 
-#include "../../../L10/TicTacToeGame/tictactoeabstractplayer.h"
+#include "tictactoeabstractplayer.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <vector>
