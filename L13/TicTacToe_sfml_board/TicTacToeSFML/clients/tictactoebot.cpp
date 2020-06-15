@@ -4,9 +4,9 @@ Position TicTacToeBot::move()
 {
     TicTacToe current_state(board_, player_);
     auto [pos, score] = max({-1, -1}, current_state, player_);
-    std::cout << "best move: " << pos.first << ", " << pos.second << "score: " << score.score
-              << std::endl;
-    score.game_result.debug();
+    //    std::cout << "best move: " << pos.first << ", " << pos.second << "score: " << score.score
+    //              << std::endl;
+    //    score.game_result.debug();
     return pos;
 }
 

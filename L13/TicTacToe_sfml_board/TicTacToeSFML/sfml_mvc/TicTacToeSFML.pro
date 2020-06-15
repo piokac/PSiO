@@ -32,4 +32,9 @@ HEADERS += \
     ../model/tictactoe.h \
 
 
-    
+CONFIG(debug, debug|release) {
+    DESTDIR = "$$ParentDirectory\debug"
+}
+CONFIG(release, debug|release) {
+    DESTDIR = "$$ParentDirectory\release"
+}
