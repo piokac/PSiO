@@ -2,6 +2,7 @@
 #define TICTACTOETCPPROXY_H
 #include "tictactoe.h"
 #include <SFML/Network.hpp>
+
 class TicTacToeTcpProxy : public TicTacToeAbstract
 {
     size_t size_;
@@ -22,7 +23,7 @@ public:
             }
         }
     }
-    std::pair<Player, Status> move(const Position &pos, Player player = Player::null)
+    std::pair<Player, Status> move(const Position &pos, Player player = Player::null) override
     {
         ComFrame request, response;
         request.player = player;
@@ -41,18 +42,17 @@ public:
                     transform_to_board(last_response_.board);
                     return {last_response_.player, last_response_.status};
                 }
+                socket.disconnect();
             }
         } else {
             std::cout << "TCP error" << std::endl;
         }
         return {last_response_.player, last_response_.status};
     }
-    Player active_player() const { return last_response_.player; } //cached
-    const std::vector<std::vector<Player>> &state(bool cached = false)
+    Player active_player() const override { return last_response_.player; } //cached
+    const std::vector<std::vector<Player>> &state() override
     {
-        if (cached) {
-            return board_;
-        } else {
+        {
             ComFrame request, response;
 
             request.request = Request::status;
@@ -65,19 +65,21 @@ public:
                     std::cout << "Send error " << std::endl;
                 } else {
                     std::size_t received;
-                    if (socket.receive(&response, sizeof(response), received) != sf::Socket::Done) {
+                    if (socket.receive(&response, sizeof(response), received) == sf::Socket::Done) {
                         last_response_ = response;
                         transform_to_board(last_response_.board);
                         return board_;
                     }
+                    socket.disconnect();
                 }
             } else {
                 std::cout << "TCP error" << std::endl;
             }
         }
+        return board_;
     }
-    Status is_finished() { return last_response_.status; }
-    void restart()
+    Status is_finished() const override { return last_response_.status; }
+    void restart() override
     {
         ComFrame request, response;
 
@@ -96,6 +98,7 @@ public:
                     transform_to_board(last_response_.board);
                     return;
                 }
+                socket.disconnect();
             }
         }
     }
